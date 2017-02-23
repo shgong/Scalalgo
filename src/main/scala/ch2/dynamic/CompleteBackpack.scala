@@ -9,12 +9,15 @@ object CompleteBackpack {
     val l = w.length
     val dp = Array.fill(l)(Array.fill(l)(0))
 
-    for (i <- l - 1 to 0; j <- 0 to W) {
-      if (j < w(i)) dp(i)(j) = dp(i + 1)(j)
-      else dp(i)(j) = math.max(dp(i + 1)(j), dp(i + 1)(j - w(i)) + v(i))
+    // can also reuse one dimension array
+    // as only one direct upper array is used
+    for (i <- 0 to l; j <- 0 to W) {
+      if (j < w(i)) dp(i+1)(j) = dp(i)(j)
+      else dp(i+1)(j) = math.max(dp(i)(j), dp(i + 1)(j - w(i)) + v(i))
     }
 
     println(dp(0)(W))
   }
 
 }
+

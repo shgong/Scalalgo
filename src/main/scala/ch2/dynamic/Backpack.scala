@@ -1,5 +1,6 @@
 package ch2.dynamic
 
+// 0/1 backpack problem
 // goods with weight and value, choose weight less than W with highest value
 
 object Backpack {
