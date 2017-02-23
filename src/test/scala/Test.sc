@@ -1,6 +1,6 @@
 import ch1._
 import ch2._
-import util.Timer._
+import timer.Timer._
 
 import scala.util.Random
 import scala.annotation.tailrec
