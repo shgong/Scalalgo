@@ -20,3 +20,4 @@
     .filter(_._1<=W)
     .filter(!_._1.isInfinity)
     .last._2
+
