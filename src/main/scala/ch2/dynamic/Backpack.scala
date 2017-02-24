@@ -15,7 +15,7 @@ object Backpack {
   // O(nW)
   def solve(w:Array[Int], v:Array[Int], W: Int)={
     val l = w.length
-    val dp = Array.fill(l)(Array.fill(l)(-1))
+    val dp = Array.fill(l)(Array.fill(W)(-1))
 
     def rec(i:Int, j:Int): Int = {
         if(dp(i)(j)>=0) dp(i)(j)
@@ -37,7 +37,7 @@ object Backpack {
   // double loop is enough
   def solve2(w:Array[Int], v:Array[Int], W: Int)={
     val l = w.length
-    val dp = Array.fill(l)(Array.fill(l)(0))
+    val dp = Array.fill(l)(Array.fill(W)(0))
 
     for (i <- l - 1 to 0; j <- 0 to W) {
       if (j < w(i)) dp(i)(j) = dp(i + 1)(j)
