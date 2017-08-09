@@ -21,10 +21,10 @@ object CoinGame1 {
     for(i<- 0 to x) {
       if(win(i) == -1)
         for(coin<-a if i+coin<=x)
-          win(i+coin) = 1
+          win(i+coin) = 1                       // lose->win exist
       else if (win(i)==1)
         for(coin<-a if i+coin<=x)
-          if(win(i+coin) == 0) win(i+coin) = -1
+          if(win(i+coin) == 0) win(i+coin) = -1 // win->lose any
     }
     println(win.toList)
     if(win.last > 0) "Alice" else "Bob"
