@@ -16,17 +16,17 @@ object CoinGame1 {
     any i => j - ai = win     lose
      */
 
-    val win = Array.fill(x)(0)
+    val win = Array.fill(x+1)(0)
     win(0) = -1
-    for(i<- 1 until x) {
+    for(i<- 0 to x) {
       if(win(i) == -1)
-        for(coin<-a if i+coin<x)
-          if(win(i+coin) == 0) win(i+coin) = 1
+        for(coin<-a if i+coin<=x)
+          win(i+coin) = 1
       else if (win(i)==1)
-        for(coin<-a if i+coin<x)
-          win(i+coin) = -1
+        for(coin<-a if i+coin<=x)
+          if(win(i+coin) == 0) win(i+coin) = -1
     }
-
+    println(win.toList)
     if(win.last > 0) "Alice" else "Bob"
   }
 
@@ -34,7 +34,8 @@ object CoinGame1 {
   def main(args: Array[String]): Unit = {
 
     val testCases = List(
-      (Array(1,2), 9)
+      (Array(1,4), 9),
+      (Array(1,4), 10)
     )
 
     testCases.foreach(x=>println((solve _).tupled(x)))
