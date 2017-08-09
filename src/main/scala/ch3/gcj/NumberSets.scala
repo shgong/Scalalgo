@@ -12,15 +12,15 @@ object NumberSets {
 
   def solve(A: Int, B: Int, P: Int): Int = {
     // need a ufs with information of common prime factor
-    val length = B - A + 1
-    val ufs = new UnionFindSet(length)
+    val ufs = new UnionFindSet(B - A + 1)
     // fast, based on prime smaller than B, avoid solve common prime factor
-    for (p <- prime if p > P) {
+    for (p <- prime if p >= P) {
       val start = (A + p - 1) / p * p
       val end = B / p * p
       for (x <- start + p to end by p) ufs.unite(start - A, x - A)
     }
-    (0 until length).count(x => ufs.find(x) == x)
+    // println(ufs.parent.toList)
+    (A to B).count(x => ufs.find(x-A) == x-A)
   }
 
 
