@@ -2,6 +2,8 @@ package ch4.str
 
 // given S, find how many length n string don't include S
 
+// Suffix automaton
+
 object DNA {
 
   // use dp, keep last 3 char as state
