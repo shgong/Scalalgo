@@ -1,3 +1,5 @@
+// Self crossing
+
 def isSelfCrossing(x: Array[Int]): Boolean = {
 
   val q = collection.mutable.ArrayBuffer[Int]()
