@@ -13,3 +13,6 @@ def getPermutation(n: Int, k: Int): String = {
 }
 
 getPermutation(2,1)
+
+// optional
+// (1 to n).map(_.toString).view.permutations.drop(k - 1).next.mkString("")
