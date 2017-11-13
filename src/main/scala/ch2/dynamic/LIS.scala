@@ -1,5 +1,4 @@
 package ch2.dynamic
-
 import scala.annotation.tailrec
 
 // Longest increasing subsequence
@@ -37,6 +36,7 @@ object LIS {
 
   def lowerBound(arr: Array[Double], key: Int): Int = {
     // binary search, return first element >= key
+
     @tailrec
     def search(lo: Int, hi: Int): Option[Int] = {
       if (lo > hi) None

@@ -10,6 +10,7 @@ object FenceRepair {
 
   // find shortest 2 wood
   // O(n2), will introduce O(nlogn) later
+
   def solve(l: Array[Int]) = {
     var ans = 0
     var n = l.length

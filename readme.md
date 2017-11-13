@@ -20,7 +20,7 @@
 
 Current folder structure reflect the book _Programming Contest Challenge_, written & translated by top ACM players, including iwi, wata, kita_masa, watashi/rejudge and navi/navimoe. It is subject to change though.
 
-## scala style algorithms
+## preview of scala style algorithms
 
 #### Largest triangle perimeter
 ```scala
@@ -30,6 +30,7 @@ array.sorted.reverse.toList.view
      .map(_.sum)
      .headOption
 ```
+
 
 #### BribeThePrisoners
 ```scala
@@ -41,6 +42,16 @@ array.sorted.reverse.toList.view
       dp(i)(j) = (i + 1 until j).map(k => dp(i)(k) + dp(k)(j)).min + A(j) + 2 - A(i)
 
     dp(0)(Q + 1)
+```
+
+#### Backpack
+```scala
+    val dp = Array.fill(l)(Array.fill(l)(0))
+
+    for (i <- l - 1 to 0; j <- 0 to W) {
+      if (j < w(i)) dp(i)(j) = dp(i + 1)(j)
+      else dp(i)(j) = math.max(dp(i + 1)(j), dp(i + 1)(j - w(i)) + v(i))
+    }
 ```
 
 #### Best Cow Line
@@ -64,6 +75,4 @@ array.sorted.reverse.toList.view
       }
     }
   }
-
 ```
-

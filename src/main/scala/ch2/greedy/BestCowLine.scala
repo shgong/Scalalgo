@@ -30,10 +30,10 @@ object BestCowLine {
     }
   }
 
+
   def main(args:Array[String]): Unit = {
     print(solve("adlkvnaslknbljfhlkdsnflksdafnhslajdfkldsn vsdjfhljasdfjlkadnf", "lnvsdladkhfoifhlafoovndalskjfhlsdfjlksnvlshfljsdjajnfklasndflksdnfljasjn"))
     print(solve("", "123412057029750897509178092W"))
   }
-
-
+  
 }
