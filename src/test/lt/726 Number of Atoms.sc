@@ -1,39 +1,52 @@
+
+import collection.mutable.Map
+
 def countOfAtoms(formula: String): String = {
-  var flag = 0
-  var buf = collection.mutable.ArrayBuffer[Char]()
-  val l = formula.length
-  var last = ""
-  var m = collection.mutable.HashMap[String, Int]("H"->12)
+  val n = formula.length
+  val s = formula
+  var i = 0
 
-
-  for (i<-0 until l-1){
-    val c = formula(i)
-
-    if(c.isLetter && c.isUpper && buf.nonEmpty) {
-      if(buf(0).isDigit) {
-        if(m.contains(last)) m(last)=m(last) + buf.mkString.toInt
-        else m(last)=buf.mkString.toInt
-        buf.clear
-      }
-      else if(buf(0).isLetter){
-        if(m.contains(last)) m(last)=m(last) + 1
-        else m(last)=1
-        last = buf.mkString
-        buf.clear
-      }
-    } else if(c.isDigit && buf.nonEmpty && buf(0).isLetter ){
-      last = buf.mkString
-      buf.clear
-    }
-
-    buf.append(c)
-    println(buf)
+  def parseFormula(): Map[String, Int] = {
+    val counts = Map[String, Int]()
+    while (i < n && s(i) != ')') merge(counts, parseUnits(), 1)
+    counts
   }
 
-  println(m)
+  def parseUnits(): Map[String, Int] = {
+    val counts = Map[String, Int]()
+    if (s(i) == '(') {
+      i += 1
+      val cnts = parseFormula()
+      i += 1
+      merge(counts, cnts, parseDigits())
+    } else {
+      val i0 = i
+      i += 1
+      while (i < n && s(i).isLower) i += 1
+      val atom = s.substring(i0, i)
+      val digits = parseDigits()
 
-  ""
+      if(counts.contains(atom)) counts(atom) += digits
+      else counts(atom) = digits
+    }
+    counts
+  }
+
+  // get digit, if not found return 1
+  def parseDigits(): Int = {
+    val i1 = i
+    while (i < n && s(i).isDigit) i += 1
+    if (i == i1) 1 else s.substring(i1, i).toInt
+  }
+
+  // merge util
+  def merge(map1: Map[String, Int], map2: Map[String, Int], x: Int): Unit =
+    for ((k, v) <- map2)
+      if(map1.contains(k))  map1(k) += v * x  else map1(k) = v*x
+
+  parseFormula().toList.sortBy(_._1).map{case(k,v)=>
+      k + (if(v==1)"" else v.toString)
+  }.mkString
 }
 
-
-countOfAtoms("H2O")
+countOfAtoms("(H2O)2KCN3")
