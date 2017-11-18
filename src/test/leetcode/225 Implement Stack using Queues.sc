@@ -1,7 +1,7 @@
 class MyStack() {
 
   /** Initialize your data structure here. */
-  val que = collection.mutable.Queue[Int]()
+  val que: collection.mutable.Queue[Int] = collection.mutable.Queue[Int]()
 
   /** Push element x onto stack. */
   def push(x: Int) {

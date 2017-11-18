@@ -1,8 +1,8 @@
 class MyQueue() {
 
   /** Initialize your data structure here. */
-  val in = collection.mutable.Stack[Int]()
-  val out = collection.mutable.Stack[Int]()
+  val in:collection.mutable.Stack[Int] = collection.mutable.Stack[Int]()
+  val out:collection.mutable.Stack[Int] = collection.mutable.Stack[Int]()
   /** Push element x to the back of queue. */
   def push(x: Int) {
     in.push(x)
