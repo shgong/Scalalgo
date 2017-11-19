@@ -6,6 +6,8 @@ val l = s.length
 var max = 0
 var maxres = ""
 
+
+// one char pivot
 for (i <- 0 until l) {
   var j = 0
   val limit = math.min(i, l - 1 - i)
@@ -19,6 +21,7 @@ for (i <- 0 until l) {
 println(maxres)
 
 
+// two char pivot
 for (i <- 0 until l - 1) {
   var j = 0
   val limit = math.min(i, l - 2 - i)
