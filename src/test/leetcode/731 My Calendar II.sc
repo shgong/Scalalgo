@@ -1,3 +1,5 @@
+// A new event can be added if adding the event will not cause a triple booking.
+
 class MyCalendarTwo {
 
   val k = collection.mutable.ArrayBuffer[(Int, Int)]()

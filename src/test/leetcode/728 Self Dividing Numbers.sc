@@ -1,3 +1,9 @@
+// A self-dividing number is a number that is divisible by every digit it contains.
+// a self-dividing number is not allowed to contain the digit zero.
+
+
+
+
 def selfDividingNumbers(left: Int, right: Int): List[Int] = {
 
   (left to right).filter { i =>
