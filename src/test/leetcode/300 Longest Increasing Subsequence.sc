@@ -1,5 +1,7 @@
 import scala.collection.Searching._
 
+// longest increasing subsequence
+// find insertion point, insert if full, otherwise update
 def lengthOfLIS(nums: Array[Int]): Int = {
   val l = nums.length
   if (l == 0) return 0
