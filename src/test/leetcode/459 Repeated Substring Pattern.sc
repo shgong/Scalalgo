@@ -11,7 +11,7 @@ You may assume the given string consists of lowercase English letters only and i
 // any potential pattern must start from beginning, divisor of length
 // don't need to check non-primes (cut into 2 not working, then 6 definitely not
 
-// GOOD SOLUTION
+// GOOD ONE
 
 def repeatedSubstringPattern(s: String): Boolean = {
   // find S in S+S
