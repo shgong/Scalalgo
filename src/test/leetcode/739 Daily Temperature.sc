@@ -9,15 +9,15 @@ For example, given the list temperatures = [73, 74, 75, 71, 69, 72, 76, 73], you
 
 def dailyTemperatures(temperatures: Array[Int]): Array[Int] = {
   val s = collection.mutable.Stack[Int]()
-  val ret = Array.fill(temperatures.length)(0)
   temperatures.indices.foreach { i =>
     while(s.nonEmpty && temperatures(i)>temperatures(s.top)) {
       val idx = s.pop()
-      ret(idx) = i - idx
+      temperatures(idx) = i - idx
     }
     s.push(i)
   }
-  ret
+  for(i<-s) temperatures(i) = 0
+  temperatures
 }
 
 // STACK!
