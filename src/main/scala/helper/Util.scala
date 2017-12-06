@@ -11,14 +11,11 @@ object Util {
   trait BarImpl[T] {def apply(str: String): T}
   implicit object barInt extends BarImpl[Int] {def apply(str: String) = str.toInt}
   implicit object barBoolean extends BarImpl[Boolean] {def apply(str: String) = str.nonEmpty}
-
-  implicit class StrConvert(x: String) {
-    def toT[T](implicit impl: BarImpl[T]): T = impl(x)
-  }
+  implicit class StrConvert(x: String) {def toT[T](implicit impl: BarImpl[T]): T = impl(x)}
 
 
   def listTuple[T](str: String)(implicit impl: BarImpl[T]) : List[(T, T)] =
-    str.drop(2).dropRight(2).split("],\\[").map { x =>
+    str.filter(_!=' ').drop(2).dropRight(2).split("],\\[").map { x =>
       val Array(a, b) = x.split(",")
       (a.toT[T], b.toT[T])
     }.toList
@@ -26,7 +23,7 @@ object Util {
 
   // Array need ClassTag
   def arrayArray[T:ClassTag](str: String)(implicit impl: BarImpl[T]) : Array[Array[T]] =
-    str.drop(2).dropRight(2).split("],\\[").map(_.split(",")).map(_.map(_.toT[T]))
+    str.filter(_!=' ').drop(2).dropRight(2).split("],\\[").map(_.split(",")).map(_.map(_.toT[T]))
 
 
 
