@@ -19,7 +19,7 @@ def buildTree(inorder:Array[Int], postorder:Array[Int]): TreeNode = {
   }
   build(inorder)
 }
-
+  
 
 
 buildTree(Array(2,1,3), Array(2,3,1))
