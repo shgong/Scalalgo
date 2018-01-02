@@ -22,8 +22,6 @@ def pyramidTransition(bottom: String, allowed: List[String]): Boolean = {
   }
 
   def generate_status(bottom: String): Boolean = {
-    println(bottom)
-
     if (bottom.length == 1) true
     else if (impossible.contains(bottom)) false
     else iterate(bottom, "")
