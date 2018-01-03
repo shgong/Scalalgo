@@ -1,5 +1,6 @@
 def isPowerOfTwo(n: Int): Boolean = {
-  n != 0 && n>0 && n == (n & -n)
+  // n != 0 && n>0 && n == (n & -n)
+  (n & (n - 1)) == 0
 }
 
 /*
@@ -13,4 +14,6 @@ a-1  = 2147483647
 a&-a = a
 a+a  = 0
 
+easier
+n & (n-1) == 0
  */
