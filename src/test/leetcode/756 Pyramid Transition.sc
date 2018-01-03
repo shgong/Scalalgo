@@ -30,6 +30,10 @@ def pyramidTransition(bottom: String, allowed: List[String]): Boolean = {
   generate_status(bottom)
 }
 
+
+pyramidTransition("ABC",
+  List("ABD","BCE","DEF","FFF"))
+
 pyramidTransition("ABDBACAAAC",
   List("ACC", "AAC", "AAB", "BCB", "BAD", "CAC", "CCD", "CAA", "CCB", "DAD", "ACD", "DCB", "ABB", "BDA", "BDC", "BDB", "BBD", "BBC", "BBB", "ADB", "ADC", "DDC", "DDB", "CDD", "CBC", "CBA", "CBD", "CDC", "DBC"))
 
