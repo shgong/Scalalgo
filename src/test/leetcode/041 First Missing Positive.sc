@@ -14,7 +14,7 @@ def firstMissingPositive(nums: Array[Int]): Int = {
   for(i<- 0 until l){
     if(nums(i)!= i+1) return i+1
   }
-  // if full  1,2,3,4
+  // no return, if full like  1,2,3,4
   l+1
 }
 
