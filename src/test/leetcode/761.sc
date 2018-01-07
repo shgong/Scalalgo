@@ -2,40 +2,34 @@
 // 1 = 0
 // prefix 1 >= 0
 
-def makeLargestSpecial(S: String): String = {
 
-  var ls: List[(Int,Int)] = Nil
+// special property: 1????0
+// 1????0 will be concatenation of 1 or more specials
+// if one, 1111110000000 already largest
+// if more, can sort them into larger specials
+// recursive
 
-  var ind = -1
-  var ones = 0
-  val l = S.length
-  for(i<- 0 until l){
-    val c = S(i)
-    if(c=='1'){
-      ones += 1
-    } else {
-      if(ones>0) ls = (ones,ind + 1) :: ls
-      ones = 0
-      ind = i
+
+def makeLargestSpecial(S: String):String = {
+  def search(l:Int, r:Int): String =  {
+    var cnt = 0
+    var prev = l
+    val specials = collection.mutable.ArrayBuffer[String]()
+
+    for (i <- l until r) {
+      cnt += 2 * S(i) - '1' - '0'
+      if (cnt == 0) {
+        specials.append(search(prev+1, i))
+        prev = i + 1
+      }
     }
+
+    specials.sorted.reverse.mkString("1","","0")
   }
 
-  ls = ls.reverse
-  val toSwap = ls.drop(1).maxBy(_._1)
-  println(toSwap)
-
-  // find first on the right
-  var i = toSwap._2 + toSwap._1
-  var rightones = toSwap._1
-  while(rightones != 0 && i<l){
-    if(S(i)=='0') rightones-=1
-    else rightones += 1
-    i+=1
-  }
-  // swap (toSwap._2 until i-1)
-  println(i)
-
-  ""
+  search(0, S.length).slice(1,S.length+1)
 }
 
-makeLargestSpecial("1101100")
+makeLargestSpecial("110100")
+
+makeLargestSpecial("11011000")
