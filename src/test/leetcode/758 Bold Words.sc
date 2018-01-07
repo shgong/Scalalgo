@@ -6,16 +6,13 @@ def boldWords(words: Array[String], S: String): String = {
   val l = S.length
   val bold = Array.fill(l)(false)
 
-  for(i<-1 to l){
-    val k = S.take(i)
-    for(w<-words){
-      if(k.endsWith(w)){
-        for(j<-0 until w.length){
-          bold(i-1-j) = true
-        }
-      }
-    }
-  }
+  for {
+    i <- 1 to l
+    k = S.take(i)
+    w <- words if k.endsWith(w)
+    j <- 0 until w.length
+  } bold(i - 1 - j) = true
+
 
   //println(bold.toList)
   var bb = false
@@ -35,10 +32,9 @@ def boldWords(words: Array[String], S: String): String = {
   }.mkString("")
 
   if(bb) res+"</b>" else res
-
 }
 
 boldWords(
   Array("ab", "bc"),
-  "aabcdab"
+  "aabcdabd"
 )
