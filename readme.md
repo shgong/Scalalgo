@@ -31,6 +31,20 @@ array.sorted.reverse.toList.view
      .headOption
 ```
 
+#### Generate all structurally unique BST's that store values 1...n.
+```scala
+case class TreeNode(value: Int, left: TreeNode = null, right: TreeNode = null)
+
+def gen(start: Int, end: Int): IndexedSeq[TreeNode] = {
+  if (start > end) return IndexedSeq(null)
+  for {
+    idx <- start to end
+    left <- gen(start, idx - 1)
+    right <- gen(idx + 1, end)
+  } yield TreeNode(idx, left, right)
+}
+```
+
 
 #### BribeThePrisoners
 ```scala
