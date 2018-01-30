@@ -1,6 +1,5 @@
 // 774. Minimize Max Distance to Gas Station
 
-// binary search the best max distance
 def minmaxGasDist(stations: Array[Int], K: Int): Double = {
 
   val l = stations.length
