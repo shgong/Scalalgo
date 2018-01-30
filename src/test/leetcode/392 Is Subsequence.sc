@@ -14,6 +14,8 @@ def isSubsequence(s: String, t: String): Boolean = {
   i == s.length
 }
 
+// follow-up: index each characters of t to accelerate search
+
 isSubsequence("b","c")
 isSubsequence("","c")
 isSubsequence("b","")
