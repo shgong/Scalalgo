@@ -31,13 +31,16 @@ def findDuplicate(nums: Array[Int]): Int = {
     fast = nums(nums(fast))
   }
 
-  fast = 0
+  // now pointer inside the loop
+  // start over from 0 one step a time
+  // the first time they meet will be the start of the loop
 
+  fast = 0
   while (fast != slow) {
     fast = nums(fast)
     slow = nums(slow)
   }
-  return slow
+  slow
 
 }
 
