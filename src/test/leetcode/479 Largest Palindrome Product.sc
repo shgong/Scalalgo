@@ -26,14 +26,13 @@ def largestPalindrome(n: Int): Int = {
     val palindrom = (firstHalf.toString + firstHalf.toString.reverse).toLong
 
     // search for factors
-    var i = upperBound
+    var i = upperBound.toLong
     while(i > lowerBound) {
       // if n= 3 none of the factor of palindrom
       // can be more than 999 or less than square root of assumed palindrom
-      if (palindrom / i > maxNumber || i * i < palindrom) i = lowerBound
-
+      if (palindrom / i > maxNumber || i * i < palindrom) i = lowerBound.toLong
       // if two factors found
-      if (palindrom % i == 0) return (palindrom % 1337).toInt
+      else if (palindrom % i == 0) return (palindrom % 1337).toInt
       i-=1
     }
 
@@ -43,6 +42,4 @@ def largestPalindrome(n: Int): Int = {
   -1
 }
 
-largestPalindrome(1)
-largestPalindrome(2)
-largestPalindrome(3)
+for(i<-1 to 8) println(largestPalindrome(i))
