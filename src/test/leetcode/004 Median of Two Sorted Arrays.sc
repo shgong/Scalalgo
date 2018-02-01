@@ -1,37 +1,50 @@
 def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {
 
+  def bSearch(x:Array[Int], start:Int, end:Int, target:Int):Int = {
+    var s = start
+    var e = end
 
-  def find(a:Array[Int], b:Array[Int], target: Int): Int = {
-    val la = a.length
-    val ma = (la+1)/2
-    val lb = b.length
-    val mb = (lb+1)/2
-
-    println(s"${a.toList} ${b.toList} $target $ma $mb")
-
-    if(la==0) b(target-1)
-    else if(lb==0) a(target-1)
-    else if(la+lb<=5) (a ++ b).sorted.apply(target-1)
-    else if(a(ma-1)>=b(mb-1)){
-      if(target<=mb) find(a.take(ma), b.take(mb), target)
-      else if(target>ma + lb) find(a.drop(ma), b.drop(mb), target-ma-mb)
-      else find(a.take(ma), b.drop(mb), target-mb)
-    } else {
-      if(target<=ma) find(a.take(ma), b.take(mb), target)
-      else if(target>mb + la) find(a.drop(mb), b.drop(ma), target-mb-ma)
-      else find(a.drop(ma), b.take(mb), target-ma)
+    while(s<e){
+      val mid = (s + e) / 2
+      if(x(mid)>target) e = mid
+      else s = mid + 1
     }
+
+    s
   }
 
-  val len = nums1.length + nums2.length
-  if((len & 1) == 0) 0.5 * find(nums1,nums2,len/2) + 0.5 * find(nums1,nums2,len/2+1)
-  else 1.0 * find(nums1,nums2,(len+1)/2)
+
+  var lo = 0
+  var lo2 = 0
+  var hi = nums1.length - 1
+  var hi2 = nums2.length - 1
+  val target = (nums1.length + nums2.length - 1) / 2
+  var found = false
+
+  while(lo<hi && lo2 < hi2){
+
+    val mid = ( lo + hi ) / 2
+    val mid2 = bSearch(nums2, lo2, hi2, nums1(mid))
+
+
+    println(nums1(lo), nums1(mid),  nums1(hi), nums2(lo2), nums2(mid2), nums2(hi2))
+
+    if(mid + mid2 + 1 < target + 1){
+      lo = mid
+      lo2 = mid2
+    } else {
+      hi = mid
+      hi2 = mid2
+    }
+
+  }
+
 }
-// TODO
+// TODO: search 1 in 2, swap, search 2 in 1
 
 findMedianSortedArrays(
-  Array(1,2,3,4,5,6,7,8),
-  Array(9,10,11,12,13)
+  Array(1, 2, 3, 4, 5, 6, 7, 8),
+  Array(9, 10, 11, 12, 13)
 )
 
-findMedianSortedArrays(Array(1,2,2),Array(1,2,3))
+findMedianSortedArrays(Array(1, 2, 2), Array(1, 2, 3))
