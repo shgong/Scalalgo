@@ -11,31 +11,28 @@ You start at the top left square (0, 0). What is the least time until you can re
  */
 def swimInWater(grid: Array[Array[Int]]): Int = {
   val l = grid.length
-  var t = 0
-  val visited = collection.mutable.HashSet[(Int,Int)]((0,0))
+  val visited = collection.mutable.HashSet((0, 0))
+  // priority queue, always visit smallest first, set ordering
+  val heap = collection.mutable.PriorityQueue((grid(0)(0), 0, 0))(Ordering.by(-_._1))
 
-  def swim(x:Int, y:Int): Unit = {
-    for(
-      (i,j)<-List((x-1,y),(x+1,y),(x,y-1),(x,y+1))
-      if i>=0 && i < l && j>=0 && j<l &&
-        !visited.contains((i,j)) && grid(i)(j)<=t
+  var res = 0
+  while (heap.nonEmpty) {
+    val (d, x, y) = heap.dequeue()
+    res = res max d // after such time haven't meet
+    println(res)
+    if (x == l - 1 && y == l - 1) return res
+
+    for (
+      (i, j) <- List((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1))
+      if i >= 0 && i < l && j >= 0 && j < l && !visited.contains((i, j))
     ) {
-      visited += ((i,j))
-      swim(i, j)
+      heap.enqueue((grid(i)(j), i, j))
+      visited.add((i, j))
     }
-
   }
-
-  t = grid(0)(0)
-
-  while(true){
-    for(i<-visited) swim(i._1, i._2)
-    if(visited.contains((l-1,l-1))) return t
-
-    t += 1
-  }
-
-  -1
+  res
 }
 
-swimInWater(Array(Array(0,2),Array(1,3)))
+swimInWater(Array(Array(0, 2), Array(1, 3)))
+val q = helper.Util.arrayArray[Int]("[[0,1,2,3,4],[24,23,22,21,5],[12,13,14,15,16],[11,17,18,19,20],[10,9,8,7,6]]")
+swimInWater(q)
