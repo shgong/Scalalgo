@@ -32,3 +32,5 @@ def splitBST(root: TreeNode, V: Int): Array[TreeNode] = {
 
   split(root)
 }
+
+// bst
