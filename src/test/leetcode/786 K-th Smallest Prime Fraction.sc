@@ -62,18 +62,6 @@ def kthSmallestPrimeFraction(A: Array[Int], K: Int): Array[Int] = {
   Array()
 }
 
-/*
-		        for(int i = 0;i < n;i++){
-		        	double ln = high * a[i];
-		        	for(int j = 0;j < i;j++){
-		        		if(Math.abs(ln-a[j]) < eps){
-		        			return new int[]{a[j], a[i]};
-		        		}
-		        	}
-		        }
-
- */
-
 
 kthSmallestPrimeFraction(Array(1, 2, 3, 5),3)
 kthSmallestPrimeFraction(Array(1, 7),1)
