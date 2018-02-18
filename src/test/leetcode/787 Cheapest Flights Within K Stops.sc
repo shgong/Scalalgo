@@ -17,15 +17,14 @@ def findCheapestPrice(n: Int, flights: Array[Array[Int]], src: Int, dst: Int, K:
   val price: Map[Int, Array[Array[Int]]] = flights.groupBy(_ (0))
 
   // city, price, stop
-  var total = collection.mutable.HashMap[Int, Int](src -> 0)
+  var cur = collection.mutable.HashMap[Int, Int](src -> 0)
   val visited = collection.mutable.HashMap[Int, Int]()
-
 
   for (stop <- 0 to K) {
     var next = collection.mutable.HashMap[Int, Int]()
 
     for {
-      (city, money) <- total if price.contains(city)
+      (city, money) <- cur if price.contains(city)
       Array(u, v, w) <- price(city)
       if !visited.contains(v) || visited(v) > money + w
     } {
@@ -33,7 +32,7 @@ def findCheapestPrice(n: Int, flights: Array[Array[Int]], src: Int, dst: Int, K:
       next(v) = money + w
     }
 
-    total = next
+    cur = next
   }
 
   visited.getOrElse(dst, -1)
