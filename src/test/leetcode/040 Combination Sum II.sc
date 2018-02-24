@@ -1,6 +1,7 @@
 
 /*
 Each number in C may only be used once in the combination.
+Iterate by the same number
  */
 
 // dfs
