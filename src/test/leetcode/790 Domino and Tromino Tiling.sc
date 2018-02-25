@@ -3,55 +3,35 @@
 Domino and Tromino Tiling
 
 XX  <- domino
-
 XX  <- "L" tromino
 X
+
+2 => 2
+3 => 5
+4 => 2*n3 + n1 = 11
+5 => 2*n4 + n2 = 24
+
+why
+https://cs.stackexchange.com/questions/66658/domino-and-tromino-combined-tiling
+
+f(n) = f(n-1) + f(n-2) + 2 * f(prev)
+f(n-1) = f(n-2) + f(n-3) + 2* f(prev)
+=>
+f(n) = 2*f(n-1) + f(n-3)
  */
 
 def numTilings(N: Int): Int = {
   val MOD = 1000000007
-  var dp = Array.fill(4)(0L)
-  dp(0) = 1
-
-  for (n <- 0 until N)
-    dp =
-      Array(
-        (dp(0) + dp(1) + dp(2) + dp(3)) % MOD, // all
-        (dp(3) + dp(2)) % MOD,
-        (dp(3) + dp(1)) % MOD,
-        dp(0) % MOD
-      )
+  var dp = Array(1L,1L,0L)
+  for (n <- 2 to N){
+    dp = Array(
+      (dp(0)*2+dp(2)) % MOD,
+      dp(0),
+      dp(1)
+    )
+  }
 
   dp(0).toInt
 }
 
-for(x<-1 until 10)
-println(numTilings(x))
-
-/*
-	        int mod = 1000000007;
-	        long[] dp = new long[4];
-	        dp[0] = 1;
-	        for(int i = 0;i < n;i++){
-	        	long[] ndp = new long[4];
-	        	// ||
-	        	ndp[3] += dp[0];
-	        	// |
-	        	ndp[1] += dp[2];
-	        	ndp[2] += dp[1];
-	        	// none
-	        	ndp[0] += dp[3];
-	        	// -
-	        	ndp[0] += dp[0];
-
-	        	ndp[1] += dp[0];
-	        	ndp[2] += dp[0];
-	        	ndp[3] += dp[1];
-	        	ndp[3] += dp[2];
-
-	        	for(int j = 0;j < 4;j++){
-	        		dp[j] = ndp[j] % mod;
-	        	}
-	        }
-	        return (int)dp[0];
- */
+numTilings(30)
