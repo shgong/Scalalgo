@@ -1,10 +1,10 @@
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
-class Solution(object):
+class Solution:
     def hasCycle(self, head):
         """
         :type head: ListNode
@@ -23,3 +23,13 @@ class Solution(object):
             fast = fast.next.next
 
         return True
+
+a = ListNode(1)
+b = ListNode(2)
+a.next = b
+
+s = Solution()
+print(s.hasCycle(a))
+
+b.next = a
+print(s.hasCycle(a))
