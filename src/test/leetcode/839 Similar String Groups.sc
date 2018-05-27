@@ -38,13 +38,10 @@ def numSimilarGroups(A: Array[String]): Int = {
     parent(x)
   }
 
-  for (i <- 0 until len; j <- i + 1 until len
-       if find(i) != find(j)  && isSimilar(A(i), A(j)))
+  for (i <- 0 until len; j <- i + 1 until len if find(i) != find(j) && isSimilar(A(i), A(j)))
     union(i, j)
 
-  for (i <- 0 until len) parent(i) = find(i)
-
-  parent.toSet.size
+  parent.map(find).toSet.size
 }
 
 numSimilarGroups(Array("tars", "rats", "arts", "star"))
